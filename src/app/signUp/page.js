@@ -1,6 +1,6 @@
 'use client';
+import React, { useState, useCallback } from "react";
 import Image from "next/image";
-import { useState } from "react";   
 
 export default function SignUp() {
     const [firstName, setFirstName] = useState("");
@@ -9,32 +9,38 @@ export default function SignUp() {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
-    const handleFirstNameChange = (event) => {
+    // Define useCallback to memoize the functions and prevent unnecessary re-renders
+    const handleFirstNameChange = useCallback((event) => {
         setFirstName(event.target.value);
-    }
+    }, []);
 
-    const handleLastNameChange = (event) => {
+    const handleLastNameChange = useCallback((event) => {
         setLastName(event.target.value);
-    }
+    }, []);
 
-    const handleEmailChange = (event) => {
+    const handleEmailChange = useCallback((event) => {
         setEmail(event.target.value);
-    }
+    }, []);
 
-    const handlePasswordChange = (event) => {
+    const handlePasswordChange = useCallback((event) => {
         setPassword(event.target.value);
-    }
+    }, []);
 
-    const handleConfirmPasswordChange = (event) => {
+    const handleConfirmPasswordChange = useCallback((event) => {
         setConfirmPassword(event.target.value);
-    }
+    }, []);
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = useCallback(async (event) => {
         event.preventDefault();
+        if(password.length < 6){
+            alert("Password must be at least 6 characters long.");
+            return;
+        }
         if (password !== confirmPassword) {
             alert("Password and confirm password do not match.");
             return;
         }
+
         const userData = {
             firstName: firstName,
             lastName: lastName,
@@ -69,11 +75,12 @@ export default function SignUp() {
             // Handle network errors or other unexpected errors
             console.error('Error:', error);
         }
-    };
+    }, [firstName, lastName, email, password, confirmPassword]);
+
     return(
         <>
             <section className="mx-auto w-4/5">
-                <h1 className="text-center text-3xl font-bold text-gray-200 drop-shadow leading-relaxed">Register</h1>
+                <h1 className="text-center text-3xl font-bold text-colorSNav drop-shadow leading-relaxed">Register</h1>
                 <form className="flex flex-col gap-3 my-3" onSubmit={handleSubmit}>
                     <input type="text" placeholder="FIRST NAME" required value={firstName} onChange={handleFirstNameChange} />
                     <input type="text" placeholder="LAST NAME" required value={lastName} onChange={handleLastNameChange} />
@@ -98,6 +105,7 @@ export default function SignUp() {
         </>
     );
 }
+
 
 
    
