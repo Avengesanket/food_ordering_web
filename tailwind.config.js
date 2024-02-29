@@ -12,7 +12,6 @@ module.exports = {
         colorSNav: "#3a4664",
         linkHover: "#7b03fc",
         primary: "#333",
-
       },
     },
   },

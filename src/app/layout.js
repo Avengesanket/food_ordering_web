@@ -1,9 +1,9 @@
-import Footer from '../components/layout/Footer';
-import Header from '../components/layout/Header';
+import Footer from "../components/layout/Footer";
+import Header from "../components/layout/Header";
 import { Roboto } from "next/font/google";
 import "./globals.css";
 
-const roboto = Roboto({ subsets: ["latin"], weight: ['400', '500', '700'] });
+const roboto = Roboto({ subsets: ["latin"], weight: ["400", "500", "700"] });
 
 export const metadata = {
   title: "Create Next App",
@@ -14,14 +14,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={roboto.className}>
-      <div className='flex flex-col min-h-screen'>
-
-      <main className="bg-gradient-to-b from-sky-300 to-purple-500 h-full flex-grow">
-      <Header />
-        {children}
-      </main>
-      <Footer />
-      </div>
+        <div className="flex flex-col min-h-screen">
+          <main className="bg-gradient-to-b from-sky-300 to-purple-500 h-full flex-grow">
+            <Header />
+            {children}
+          </main>
+          <Footer />
+        </div>
       </body>
     </html>
   );
